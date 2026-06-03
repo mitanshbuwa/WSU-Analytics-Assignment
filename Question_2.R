@@ -43,4 +43,30 @@ genre_summary <- session_genre %>%
   ) %>%
   arrange(desc(number_of_unique_players))
 
+  # -----------------------------
+# Display table using kable
+# -----------------------------
+genre_summary %>%
+  kbl(caption = "Game Genre Engagement Summary") %>%
+  kable_classic(full_width = FALSE)
+
+# -----------------------------
+# Visualise Number of Unique Players by Genre
+# -----------------------------
+ggplot(genre_summary,
+       aes(x = reorder(genre, -number_of_unique_players),
+           y = number_of_unique_players,
+           fill = genre)) +
+  geom_col() +
+  labs(
+    title = "Number of Unique Players by Game Genre",
+    x = "Genre",
+    y = "Number of Unique Players"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+  
+  //Completed & Tested
+
 
