@@ -33,3 +33,25 @@ players <- players %>%
       TRUE ~ NA_character_
     )
   )
+
+  
+# -----------------------------
+# Merge players with sessions
+# -----------------------------
+age_sessions <- sessions %>%
+  left_join(players, by = "player_id") %>%
+  filter(!is.na(age_group))
+
+# -----------------------------
+# Compute summary statistics
+# -----------------------------
+age_summary <- age_sessions %>%
+  group_by(age_group) %>%
+  summarise(
+    avg_play_time = mean(play_time_minutes, na.rm = TRUE),
+    avg_score = mean(score, na.rm = TRUE),
+    number_of_sessions = n()
+  ) %>%
+  arrange(age_group)
+
+
