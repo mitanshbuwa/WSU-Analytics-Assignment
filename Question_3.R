@@ -41,4 +41,23 @@ top_player_stats <- sessions %>%
   ) %>%
   arrange(desc(avg_play_time))
 
+# -----------------------------
+# Display table using kable
+# -----------------------------
+top_player_stats %>%
+  kbl(caption = "Top 10 Players and Their Behaviour") %>%
+  kable_classic(full_width = FALSE)
 
+# -----------------------------
+# Visualise score distribution using boxplot
+# -----------------------------
+ggplot(sessions %>% filter(player_id %in% top_players$player_id),
+       aes(x = factor(player_id), y = score, fill = factor(player_id))) +
+  geom_boxplot() +
+  labs(
+    title = "Score Distribution of Top 10 Players",
+    x = "Player ID",
+    y = "Score"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
