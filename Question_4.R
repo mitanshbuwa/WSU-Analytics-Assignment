@@ -54,4 +54,27 @@ age_summary <- age_sessions %>%
   ) %>%
   arrange(age_group)
 
+# -----------------------------
+# Display table using kable
+# -----------------------------
+age_summary %>%
+  kbl(caption = "Age Group Behaviour Summary") %>%
+  kable_classic(full_width = FALSE)
 
+# -----------------------------
+# Visualise Average Play Time by Age Group
+# -----------------------------
+ggplot(age_summary,
+       aes(x = age_group, y = avg_play_time, fill = age_group)) +
+  geom_col() +
+  labs(
+    title = "Average Play Time by Age Group",
+    x = "Age Group",
+    y = "Average Play Time (minutes)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+
+
+// Completed & Tested
