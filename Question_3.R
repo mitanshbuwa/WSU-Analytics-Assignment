@@ -28,4 +28,17 @@ top_players <- sessions %>%
   arrange(desc(total_play_time)) %>%
   slice_head(n = 10)
 
+# -----------------------------
+# Analyse behaviour of top players
+# -----------------------------
+top_player_stats <- sessions %>%
+  filter(player_id %in% top_players$player_id) %>%
+  group_by(player_id) %>%
+  summarise(
+    total_sessions = n(),
+    avg_play_time = mean(play_time_minutes, na.rm = TRUE),
+    avg_score = mean(score, na.rm = TRUE)
+  ) %>%
+  arrange(desc(avg_play_time))
+
 
