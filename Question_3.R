@@ -61,3 +61,6 @@ ggplot(sessions %>% filter(player_id %in% top_players$player_id),
   ) +
   theme_minimal() +
   theme(legend.position = "none")
+
+
+// Completed & Tested
